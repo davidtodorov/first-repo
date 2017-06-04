@@ -1,2 +1,3 @@
+New line
 Update with bash
 Update with SourceTree
