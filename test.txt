@@ -1,3 +1,5 @@
 New line
 Update with bash
 
+Changes from master
+
