@@ -2,69 +2,66 @@ https://drive.google.com/file/d/0B6d06BZA-wXedTRCSnk3eU5rNXM/view
 
 https://github.com/MeGaDeTH91/Programming-Fund/tree/master/38%20Progr.%20Fund%20RETAKE%20-%2020.Aug.17?fref=gc&dti=1428026213914462
 
-Eto ot tuk nadolu: Icarus
-
- using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace icarus_shiban
+namespace ConsoleApp4
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var input = Console.ReadLine().Split().Select(decimal.Parse).ToArray();
-            var position = decimal.Parse(Console.ReadLine());
-            decimal damage=1;
-
+            var creatureSquad = new Dictionary<string, List<string>>();
             while (true)
             {
-                var input2 = Console.ReadLine().Split().ToArray();
-                if (input2[0] == "Supernova")
+                var input = Console.ReadLine().Split(" ->".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                if (string.Join(" ",input) =="Blaze it!")
                 {
-                    Console.WriteLine(string.Join(" ", input));
+                    
+                    foreach (var creatureSqd in creatureSquad)
+                    {
+                        var count = creatureSqd.Value.Count;
+                        
+
+                        foreach (var squads in creatureSqd.Value)
+                        {
+                            if (creatureSquad.ContainsKey(squads))
+                            {
+                                count--;
+                            }
+                        }
+                        if (creatureSquad.ContainsKey("Phoenix"))
+                        {
+                            count = 4;
+                            creatureSquad.Remove("Phoenix");
+                            Console.WriteLine($"Phoenix : 4");
+                        }
+                        Console.WriteLine($"{creatureSqd.Key} : {count}");
+                    }
                     break;
                 }
-
-                if (input2[0] == "right")
+                var creature = input[0];
+                var squad = input[1];
+                var squadList = new List<string>();
+                if (squad == creature)
                 {
-                    for (int i = 0; i < decimal.Parse(input2[1]); i++)
-                    {
-
-                        position += 1;
-                        if (position == input.Length + 1)
-                        {
-                            position = input[0];
-                            damage++;
-                        }
-                        input[(long)position] -= damage;
-                    }
+                    continue;
                 }
-
-                if (input2[0] == "left")
+                if (!creatureSquad.ContainsKey(creature))
                 {
-                    for (long i = 0; i < long.Parse(input2[1]); i++)
-                    {
-
-                        position -= 1;
-                        if (position == -1)
-                        {
-                            position = input.Length-1;
-                            damage++;
-                        }
-                        if (input[(int)position] >0)
-                        {
-
-                            input[(long)position] -= damage;
-                        }
-                    }
+                    creatureSquad[creature] = new List<string>();
                 }
+                if (creatureSquad[creature].Contains(squad))
+                {
+                    continue;
+                }
+                
+                creatureSquad[creature].Add(squad);
+
             }
-
-            
         }
     }
 }
