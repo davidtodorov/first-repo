@@ -4,46 +4,67 @@ https://github.com/MeGaDeTH91/Programming-Fund/tree/master/38%20Progr.%20Fund%20
 
 Eto ot tuk nadolu: Icarus
 
- var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
-            int currentPosition = int.Parse(Console.ReadLine());
-            int currentDamage = 1;
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace icarus_shiban
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split().Select(decimal.Parse).ToArray();
+            var position = decimal.Parse(Console.ReadLine());
+            decimal damage=1;
+
             while (true)
             {
-                var directionSteps = Console.ReadLine().Split().ToArray();
-                var direction = directionSteps[0];
-                if (directionSteps[0] == "Supernova")
+                var input2 = Console.ReadLine().Split().ToArray();
+                if (input2[0] == "Supernova")
                 {
+                    Console.WriteLine(string.Join(" ", input));
                     break;
                 }
-                int steps = int.Parse(directionSteps[1]);
-                
-                if (direction == "right")
+
+                if (input2[0] == "right")
                 {
-                    for (int i = 0; i < steps; i++)
+                    for (int i = 0; i < decimal.Parse(input2[1]); i++)
                     {
-                        currentPosition += 1;
-                        if (currentPosition > input.Length)
+
+                        position += 1;
+                        if (position == input.Length + 1)
                         {
-                            currentPosition = 0;
-                            currentDamage++;
+                            position = input[0];
+                            damage++;
                         }
-                        input[currentPosition] -= currentDamage;
+                        input[(long)position] -= damage;
                     }
                 }
-                if (direction == "left")
-                {
-                    for (int i = 0; i < steps; i++)
-                    {
-                        currentPosition -= 1;
-                        if (currentPosition < 0)
-                        {
-                            currentPosition = input.Length - 1;
-                            currentDamage++;
-                        }
-                        input[currentPosition] -= currentDamage;
 
+                if (input2[0] == "left")
+                {
+                    for (long i = 0; i < long.Parse(input2[1]); i++)
+                    {
+
+                        position -= 1;
+                        if (position == -1)
+                        {
+                            position = input.Length-1;
+                            damage++;
+                        }
+                        if (input[(int)position] >0)
+                        {
+
+                            input[(long)position] -= damage;
+                        }
                     }
                 }
             }
 
-            Console.WriteLine(string.Join(" ", input));
+            
+        }
+    }
+}
